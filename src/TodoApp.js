@@ -6,6 +6,7 @@ import ToolBar from '@material-ui/core/ToolBar';
 import Grid from '@material-ui/core/Grid';
 import TodoList from './TodoList';
 import TodoForm from './TodoForm';
+import uuid from "uuid/v4";
 
 function TodoApp() {
     const initialTodos = [
@@ -17,7 +18,20 @@ function TodoApp() {
     ]
     const [todos, setTodos] = useState(initialTodos);
     const addTodo = newTodoText => {
-        setTodos([...todos, {id: (todos.length+1), task: newTodoText, completed: false}]);
+        setTodos([...todos, {id: uuid(), task: newTodoText, completed: false}]);
+    };
+    const removeTodo = todoId => {
+        // filter-out removed todo
+        const newTodos = todos.filter(todo => todo.id !== todoId);
+        // call setTodos with new todos array
+        setTodos(newTodos);
+    }
+    const toggleTodo = todoId => {
+        const updatedTodos = todos.map(todo => 
+            todo.id === todoId ? {...todo, completed: !todo.completed} : todo
+        );
+        // updating the whole "todos" array
+        setTodos(updatedTodos);
     }
     return (
         // Paper provides a background
@@ -42,7 +56,11 @@ function TodoApp() {
         <Grid container justify="center" style={{marginTop: "1rem"}}>
             <Grid item xs={11} md={8} lg={4}>
                 <TodoForm addTodo={addTodo}/>
-                <TodoList todos={todos}/>
+                <TodoList 
+                    todos={todos} 
+                    removeTodo={removeTodo}
+                    toggleTodo={toggleTodo}
+                />
             </Grid>
         </Grid>
     </Paper>

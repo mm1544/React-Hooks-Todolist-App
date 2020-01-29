@@ -9,10 +9,14 @@ import EditIcon from '@material-ui/icons/Edit';
 // It allowes to have content (buttons) on the right side of ListItem
 import ListItemSecondaryAction from '@material-ui/core/ListItemSecondaryAction';
 
-function Todo({task, completed}) {
+function Todo({task, completed, removeTodo, id, toggleTodo}) {
     return (
         <ListItem>
-            <Checkbox tabIndex={-1} checked={completed}/>
+            <Checkbox 
+                tabIndex={-1} 
+                checked={completed}
+                onClick={() => toggleTodo(id)}    
+            />
             <ListItemText 
                 style={{textDecoration: completed ? "line-through" : "none"}}
             >
@@ -20,10 +24,15 @@ function Todo({task, completed}) {
             </ListItemText>
             <ListItemSecondaryAction>
                 {/* "aria-label" is for creen-reader */}
-                <IconButton aria-label="Delete">
+                <IconButton 
+                    aria-label="Delete" 
+                    onClick={() => removeTodo(id)}
+                >
                     <DeleteIcon />
                 </IconButton>
-                <IconButton aria-label="Edit">
+                <IconButton 
+                    aria-label="Edit"
+                >
                     <EditIcon />
                 </IconButton>
             </ListItemSecondaryAction>
