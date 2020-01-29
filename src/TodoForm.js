@@ -9,7 +9,7 @@ function TodoForm({addTodo}) { // extracting "addTodo" from props
     const [value, handleChange, reset] = useInputState("");
     return (
         // Paper is as a container
-        <Paper>
+        <Paper style={{margin: "1rem 0", padding: "0 1rem"}}>
             <form onSubmit={e=> {
                 // by the default it would refresh the page
                 e.preventDefault();
@@ -17,7 +17,13 @@ function TodoForm({addTodo}) { // extracting "addTodo" from props
                 // sets value to "" (useInputState)
                 reset();
             }}>
-                <TextField value={value} onChange={handleChange}/>
+                <TextField 
+                    value={value} 
+                    onChange={handleChange} 
+                    margin="normal" 
+                    label="Add New Task"
+                    fullWidth    
+                />
             </form>
         </Paper>
     )
