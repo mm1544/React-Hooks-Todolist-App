@@ -13,11 +13,10 @@ function TodoList({todos, removeTodo, toggleTodo, editTodo}) {
                     // "<>" - Fragment, used to group things together. It will not cause extra markup
                     <> 
                         <Todo 
-                            task={todo.task} 
+                            // instead of passing separately task, id and completed, can pass {...todo}
+                            {...todo}
                             key={todo.id}
-                            completed={todo.completed}
                             removeTodo={removeTodo}
-                            id={todo.id}
                             toggleTodo={toggleTodo}
                             editTodo={editTodo}
                         />
