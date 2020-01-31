@@ -9,7 +9,7 @@ function TodoList({todos, removeTodo, toggleTodo, editTodo}) {
     return (
         <Paper>
             <List>
-                {todos.map(todo => (
+                {todos.map((todo, i) => (
                     // "<>" - Fragment, used to group things together. It will not cause extra markup
                     <> 
                         <Todo 
@@ -21,7 +21,8 @@ function TodoList({todos, removeTodo, toggleTodo, editTodo}) {
                             toggleTodo={toggleTodo}
                             editTodo={editTodo}
                         />
-                        <Divider/>
+                        {/* Divider does not displayed after last Todo item */}
+                        {(i < todos.length - 1) && <Divider/>}
                     </>
                 ))}
             </List>
