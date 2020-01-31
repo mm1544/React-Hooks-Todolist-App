@@ -8,10 +8,25 @@ import DeleteIcon from '@material-ui/icons/Delete';
 import EditIcon from '@material-ui/icons/Edit';
 // It allowes to have content (buttons) on the right side of ListItem
 import ListItemSecondaryAction from '@material-ui/core/ListItemSecondaryAction';
+import useToggleState from './hooks/useToggleState';
+import EditTodoForm from './EditTodoForm';
 
-function Todo({task, completed, removeTodo, id, toggleTodo}) {
+function Todo({task, completed, removeTodo, id, toggleTodo, editTodo}) {
+    // by the default false is passed to useToggleState()
+    const [isEditing, toggle] = useToggleState();
     return (
         <ListItem>
+            {/* If isEditing==true then editing form is rendered, otherwise - todo-list */}
+            {isEditing ? (
+                <EditTodoForm 
+                    editTodo={editTodo}
+                    id={id}
+                    task={task}
+                    toggleEditForm={toggle}
+                />
+            )
+            : (
+            <>
             <Checkbox 
                 tabIndex={-1} 
                 checked={completed}
@@ -32,10 +47,13 @@ function Todo({task, completed, removeTodo, id, toggleTodo}) {
                 </IconButton>
                 <IconButton 
                     aria-label="Edit"
+                    onClick={toggle}
                 >
                     <EditIcon />
                 </IconButton>
             </ListItemSecondaryAction>
+            </>
+            )}
         </ListItem>
     )
 }

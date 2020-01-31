@@ -20,6 +20,10 @@ function TodoApp() {
     const addTodo = newTodoText => {
         setTodos([...todos, {id: uuid(), task: newTodoText, completed: false}]);
     };
+
+    // wee need a  state (which will be toggled on and off)
+    // that denotes whether it is todo-list is shown or a 
+    // form inside edit-form is shown                                          
     const removeTodo = todoId => {
         // filter-out removed todo
         const newTodos = todos.filter(todo => todo.id !== todoId);
@@ -33,6 +37,14 @@ function TodoApp() {
         // updating the whole "todos" array
         setTodos(updatedTodos);
     }
+    const editTodo = (todoId, newTask) => {
+        const updatedTodos = todos.map(todo => 
+            todo.id === todoId ? {...todo, task: newTask} : todo
+        );
+        // updating the whole "todos" array
+        setTodos(updatedTodos);
+    }
+
     return (
         // Paper provides a background
     <Paper
@@ -60,6 +72,7 @@ function TodoApp() {
                     todos={todos} 
                     removeTodo={removeTodo}
                     toggleTodo={toggleTodo}
+                    editTodo={editTodo}
                 />
             </Grid>
         </Grid>
