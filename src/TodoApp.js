@@ -1,4 +1,4 @@
-import React, {useState} from "react";
+import React, {useState, useEffect} from "react";
 import Typography from '@material-ui/core/Typography';
 import Paper from '@material-ui/core/Paper';
 import AppBar from '@material-ui/core/AppBar';
@@ -9,14 +9,24 @@ import TodoForm from './TodoForm';
 import uuid from "uuid/v4";
 
 function TodoApp() {
-    const initialTodos = [
-        {id: 1, task: "Pushups", completed: false},
-        {id: 2, task: "Cooking breakfast", completed: true},
-        {id: 3, task: "Morning work", completed: true},
-        {id: 4, task: "Studying", completed: false},
-        {id: 5, task: "BJJ", completed: false},
-    ]
+    // It here are data in localStorage it will use it, but if there is none, the empty array will be used
+    const initialTodos = JSON.parse(window.localStorage.getItem("todos") || "[]");
+
+    // const initialTodos = [
+    //     {id: 1, task: "Pushups", completed: false},
+    //     {id: 2, task: "Cooking breakfast", completed: true},
+    //     {id: 3, task: "Morning work", completed: true},
+    //     {id: 4, task: "Studying", completed: false},
+    //     {id: 5, task: "BJJ", completed: false},
+    // ]
     const [todos, setTodos] = useState(initialTodos);
+
+    // by the default function will run every time this component renders, therefore "[todos]" is passed. It will get run when "todos" will get changed
+    useEffect(() => {
+        // "todos" is the key under which there will be entry in localStorage
+        window.localStorage.setItem("todos", JSON.stringify(todos), [todos]);
+    })
+
     const addTodo = newTodoText => {
         setTodos([...todos, {id: uuid(), task: newTodoText, completed: false}]);
     };

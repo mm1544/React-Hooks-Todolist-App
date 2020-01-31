@@ -6,7 +6,7 @@ import Divider from '@material-ui/core/Divider';
 import Todo from './Todo';
 
 function TodoList({todos, removeTodo, toggleTodo, editTodo}) {
-    return (
+    if(todos.length) return (
         <Paper>
             <List>
                 {todos.map((todo, i) => (
@@ -27,6 +27,8 @@ function TodoList({todos, removeTodo, toggleTodo, editTodo}) {
                 ))}
             </List>
         </Paper>
-    )
+    );
+    // if todos array is empty return null
+    return null;
 }
 export default TodoList;
