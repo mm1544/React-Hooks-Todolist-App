@@ -1,4 +1,4 @@
-import React, {useEffect} from "react";
+import React from "react";
 import useTodoState from './hooks/useTodoState';
 import Typography from '@material-ui/core/Typography';
 import Paper from '@material-ui/core/Paper';
@@ -12,20 +12,14 @@ function TodoApp() {
     /*
     It here are data in localStorage it will use it, but if there is none, the empty array will be used
     */ 
-    const initialTodos = JSON.parse(window.localStorage.getItem("todos") || "[]");
+    const initialTodos = [{id: 1, task: "Go for jogging", completed: false}];
 
     /*
     Extracting from the hook
     */ 
     const {todos, addTodo, removeTodo, toggleTodo, editTodo} = useTodoState(initialTodos);
 
-    /*
-    By the default function will run every time this component renders, therefore "[todos]" is passed. It will get run when "todos" will get changed
-    */
-    useEffect(() => {
-        // "todos" is the key under which there will be entry in localStorage
-        window.localStorage.setItem("todos", JSON.stringify(todos), [todos]);
-    })
+   
 
     return (
         // Paper provides the background
