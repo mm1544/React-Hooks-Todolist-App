@@ -1,27 +1,27 @@
 // rfc (react functional component)
-import React from 'react';
+import React, { useContext } from 'react';
 import Paper from '@material-ui/core/Paper';
 import List from '@material-ui/core/List';
 import Divider from '@material-ui/core/Divider';
 import Todo from './Todo';
+// importin context
+import { TodosContext } from './context/todos.context';
 
-function TodoList({todos, removeTodo, toggleTodo, editTodo}) {
-    if(todos.length) return (
+function TodoList() {
+    const { todos } = useContext(TodosContext);
+    if (todos.length) return (
         <Paper>
             <List>
                 {todos.map((todo, i) => (
                     // "<>" - Fragment, used to group things together. It will not cause extra markup
-                    <> 
-                        <Todo 
-                            // instead of passing separately task, id and completed, can pass {...todo}
-                            {...todo}
+                    <>
+                        <Todo
                             key={todo.id}
-                            removeTodo={removeTodo}
-                            toggleTodo={toggleTodo}
-                            editTodo={editTodo}
+                            // instead of passing separately task, id and completed, will pass {...todo}
+                            {...todo}
                         />
                         {/* Divider does not displayed after last Todo item */}
-                        {(i < todos.length - 1) && <Divider/>}
+                        {(i < todos.length - 1) && <Divider />}
                     </>
                 ))}
             </List>

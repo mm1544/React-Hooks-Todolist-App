@@ -1,12 +1,17 @@
-import React from 'react';
+import React, {useContext} from 'react';
 import TextField from '@material-ui/core/TextField';
 import Paper from '@material-ui/core/Paper';
 import useInputState from './hooks/useInputState';
+// importin context
+import {TodosContext} from './context/todos.context';
 
 
-function TodoForm({addTodo}) { // extracting "addTodo" from props
+function TodoForm() {
     // custom hook
     const [value, handleChange, reset] = useInputState("");
+    // taking a "addTodo" method from "TodosContext" context
+    const {addTodo} = useContext(TodosContext);
+    console.log("Todo form render!!");
     return (
         // Paper is as a container
         <Paper style={{margin: "1rem 0", padding: "0 1rem"}}>
@@ -14,7 +19,7 @@ function TodoForm({addTodo}) { // extracting "addTodo" from props
                 // by the default it would refresh the page
                 e.preventDefault();
                 addTodo(value);
-                // sets value to "" (useInputState)
+                // sets value to ""
                 reset();
             }}>
                 <TextField 

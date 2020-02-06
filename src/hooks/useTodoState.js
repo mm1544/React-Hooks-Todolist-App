@@ -11,8 +11,8 @@ export default initialTodos => {
     };
     
     // wee need a  state (which will be toggled on and off)
-    // that denotes whether it is todo-list is shown or a 
-    // form inside edit-form is shown                                          
+    // that denotes whether it is todo-list shown or a 
+    // edit-form is shown                                          
     const removeTodo = todoId => {
         // filter-out removed todo
         const newTodos = todos.filter(todo => todo.id !== todoId);
