@@ -1,4 +1,4 @@
-import React, { useContext } from 'react';
+import React, { useContext, memo } from 'react';
 import ListItem from '@material-ui/core/ListItem';
 import ListItemText from '@material-ui/core/ListItemText';
 import Checkbox from '@material-ui/core/Checkbox';
@@ -17,6 +17,7 @@ function Todo({ task, completed, id }) {
     const dispatch = useContext(DispatchContext);
     // by the default false is passed to useToggleState()
     const [isEditing, toggle] = useToggleState();
+    console.log("TODO RE-RENDER ", id);
     return (
         <ListItem style={{ height: "64px" }}>
             {/* If isEditing==true then editing form is rendered, otherwise - todo-list */}
@@ -59,4 +60,5 @@ function Todo({ task, completed, id }) {
         </ListItem>
     )
 }
-export default Todo;
+// wrapping Todo in "memo"
+export default memo(Todo);
