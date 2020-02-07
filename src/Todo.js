@@ -10,11 +10,11 @@ import EditIcon from '@material-ui/icons/Edit';
 import ListItemSecondaryAction from '@material-ui/core/ListItemSecondaryAction';
 import useToggleState from './hooks/useToggleState';
 import EditTodoForm from './EditTodoForm';
-import { TodosContext } from './context/todos.context';
+import { DispatchContext } from './context/todos.context';
 
 function Todo({ task, completed, id }) {
     // taking "dispatch" method from the Context
-    const { dispatch } = useContext(TodosContext);
+    const dispatch = useContext(DispatchContext);
     // by the default false is passed to useToggleState()
     const [isEditing, toggle] = useToggleState();
     return (

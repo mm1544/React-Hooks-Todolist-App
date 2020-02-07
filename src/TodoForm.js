@@ -3,13 +3,13 @@ import TextField from '@material-ui/core/TextField';
 import Paper from '@material-ui/core/Paper';
 import useInputState from './hooks/useInputState';
 // importin context
-import {TodosContext} from './context/todos.context';
+import {DispatchContext} from './context/todos.context';
 
 function TodoForm() {
     // custom hook
     const [value, handleChange, reset] = useInputState("");
     // taking method from "TodosContext" context
-    const {dispatch} = useContext(TodosContext);
+    const dispatch = useContext(DispatchContext);
     console.log("Todo form render!!");
     return (
         // Paper is as a container

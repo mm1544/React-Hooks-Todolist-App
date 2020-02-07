@@ -5,13 +5,13 @@ import ListItemSecondaryAction from '@material-ui/core/ListItemSecondaryAction';
 import SaveIcon from '@material-ui/icons/Save';
 import IconButton from '@material-ui/core/IconButton';
 // importing context
-import { TodosContext } from './context/todos.context';
+import { DispatchContext } from './context/todos.context';
 
 function EditTodoForm({ id, task, toggleEditForm }) {
-    const { dispatch } = useContext(TodosContext);
+    const dispatch = useContext(DispatchContext);
     // setting the initial value of "value" to the current content of todo ("task")
     const [value, handleChange, reset] = useInputState(task);
-    console.log("Editform render");
+    console.log("Edit form render");
     return (
         // Need to have a state to control TextField
         <form onSubmit={(e) => {
