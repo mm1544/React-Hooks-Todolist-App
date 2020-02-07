@@ -1,4 +1,5 @@
-import React, { createContext } from "react";
+import React, { createContext, useReducer } from "react";
+import todoReducer from "../reducers/todo.reducer";
 // importing a HOOK
 import useTodoState from '../hooks/useTodoState';
 const defaultTodos = [
@@ -6,20 +7,25 @@ const defaultTodos = [
     { id: 2, task: "Do some programming exercise", completed: true }
 ];
 
-// creating context (exporting it because need to have an access to entire context)
+/*
+Creating context (exporting it because need to have an access to entire context)
+*/ 
 export const TodosContext = createContext();
 
 // Making todos PROVIDER
 export function TodosProvider(props){
-    // "useTodoState(..)" will return an object with many things inside of it
-    const todoStuff = useTodoState(defaultTodos);
+    /*
+    useReducer returns: 
+        1# todos -- new state value
+        2# dispatch -- function that will be used to pass-in actions
+    */ 
+    const [todos, dispatch] = useReducer(todoReducer, defaultTodos);
     return (
-        // It will wrap around Component (that are its "children")
+        // It will wrap around Components (that are its "children")
         <TodosContext.Provider 
-            value={todoStuff}
+            value={{todos, dispatch}}
         >
             {props.children}
         </TodosContext.Provider>
     )
-
 }

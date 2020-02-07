@@ -8,7 +8,7 @@ import IconButton from '@material-ui/core/IconButton';
 import { TodosContext } from './context/todos.context';
 
 function EditTodoForm({ id, task, toggleEditForm }) {
-    const { editTodo } = useContext(TodosContext);
+    const { dispatch } = useContext(TodosContext);
     // setting the initial value of "value" to the current content of todo ("task")
     const [value, handleChange, reset] = useInputState(task);
     console.log("Editform render");
@@ -17,8 +17,7 @@ function EditTodoForm({ id, task, toggleEditForm }) {
         <form onSubmit={(e) => {
             //to stop reloading page after submission
             e.preventDefault();
-            // updating todos array
-            editTodo(id, value);
+            dispatch({type: "EDIT", id: id, newTask: value});
             reset();
             toggleEditForm();
         }}
@@ -36,7 +35,7 @@ function EditTodoForm({ id, task, toggleEditForm }) {
                 <IconButton
                     aria-label="Save"
                     onClick={() => {
-                        editTodo(id, value);
+                        dispatch({type: "EDIT", id: id, newTask: value});
                         toggleEditForm();
                     }}
                 >

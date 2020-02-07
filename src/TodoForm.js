@@ -5,12 +5,11 @@ import useInputState from './hooks/useInputState';
 // importin context
 import {TodosContext} from './context/todos.context';
 
-
 function TodoForm() {
     // custom hook
     const [value, handleChange, reset] = useInputState("");
-    // taking a "addTodo" method from "TodosContext" context
-    const {addTodo} = useContext(TodosContext);
+    // taking method from "TodosContext" context
+    const {dispatch} = useContext(TodosContext);
     console.log("Todo form render!!");
     return (
         // Paper is as a container
@@ -18,7 +17,7 @@ function TodoForm() {
             <form onSubmit={e=> {
                 // by the default it would refresh the page
                 e.preventDefault();
-                addTodo(value);
+                dispatch({type: "ADD", task: value});
                 // sets value to ""
                 reset();
             }}>
