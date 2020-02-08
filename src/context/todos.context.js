@@ -1,4 +1,5 @@
-import React, { createContext, useReducer } from "react";
+import React, { createContext } from "react";
+import { useLocalStorageReducer } from "../hooks/useLocalStorageReducer";
 import todoReducer from "../reducers/todo.reducer";
 // importing a HOOK
 import useTodoState from '../hooks/useTodoState';
@@ -16,11 +17,11 @@ export const DispatchContext = createContext();
 // Making todos PROVIDER
 export function TodosProvider(props) {
     /*
-    useReducer returns: 
+    useLocalStorageReducer returns: 
         1# todos -- new state value
         2# dispatch -- function that will be used to pass-in actions
     */
-    const [todos, dispatch] = useReducer(todoReducer, defaultTodos);
+    const [todos, dispatch] = useLocalStorageReducer("todos", defaultTodos, todoReducer);
     return (
         // It will wrap around Components (that are its "children")
         <TodosContext.Provider
